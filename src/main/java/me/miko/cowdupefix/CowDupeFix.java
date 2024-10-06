@@ -9,6 +9,11 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public final class CowDupeFix extends JavaPlugin implements Listener {
 
+    @Override
+    public void onEnable() {
+        getServer().getPluginManager().registerEvents(this, this);
+    }
+
     @EventHandler(ignoreCancelled = true)
     public void onShear(PlayerShearEntityEvent event) {
         if (event.getEntity().getType() == EntityType.MUSHROOM_COW) {
@@ -16,7 +21,6 @@ public final class CowDupeFix extends JavaPlugin implements Listener {
                 event.setCancelled(true);
                 return;
             }
-
             event.getPlayer().setCooldown(Material.SHEARS, 2);
         }
     }
